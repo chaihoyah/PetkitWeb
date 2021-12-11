@@ -1,0 +1,33 @@
+.search-wrap {}
+
+a.category-item:link,
+a.category-item:visited {
+  background: #FFA41C;
+  color: #000000;
+  font-size: 13px;
+  text-decoration: none;
+  padding: 5px 8px;
+  display: inline-block;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+a.category-item:hover {}
+
+.search-ranking .list-group-item,
+.search-keyword .list-group-item {
+  border: 0;
+  padding: 0;
+  font-size: 18px;
+}
+
+a.search-keyword-item:link,
+a.search-keyword-item:visited {
+  color: #000000;
+  text-decoration: none;
+}
+
+a.search-keyword-item:hover {
+  text-decoration: underline;
+}

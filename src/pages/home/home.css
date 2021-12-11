@@ -1,0 +1,57 @@
+/* Modal Filter */
+.modal-filter .modal-dialog {
+  align-items: flex-end;
+}
+
+@media (min-width: 1200px) {
+  .modal-filter .modal-dialog {
+    max-width: 366px;
+  }
+}
+
+.modal-filter .modal-body {
+  padding: 0px !important;
+  font-size: 16px;
+  min-height: 280px;
+}
+
+.modal-filter .modal-content {
+  border: 0;
+  border-top: 1px solid #000000;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background: #ffffff;
+}
+
+.modal-filter .modal-footer {
+  background: #c4c4c4;
+  border: 0 !important;
+  padding: 5px !important;
+}
+
+.modal-filter .modal-footer .btn-default {
+  background-color: #ffffff !important;
+  border-radius: 0 !important;
+  color: #000000;
+}
+
+.filter-btn-close {
+  border-radius: 0 !important;
+  border: 0 !important;
+}
+
+.filter-btn-close:hover,
+.filter-btn-close:focus {
+  box-shadow: none  !important;
+}
+
+/* Range sliders */
+.multi-range-slider .bar-inner {
+  background-color: #FFA41C !important;
+  border: 1px solid #FFA41C !important;
+  box-shadow: inset 0px 0px 5px #FFA41C !important;
+}
+
+.multi-range-slider .thumb * {
+  background-color: #FFA41C !important;
+}
