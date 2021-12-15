@@ -33,6 +33,51 @@ body {
   font-size: 24px;
 }
 
+@font-face {
+  font-family: "NeoB";
+  src: url("../assets/font/AppleSDGothicNeoB.ttf");
+}
+
+@font-face {
+  font-family: "NeoEB";
+  src: url("../assets/font/AppleSDGothicNeoEB.ttf");
+}
+
+@font-face {
+  font-family: "NeoH";
+  src: url("../assets/font/AppleSDGothicNeoH.ttf");
+}
+
+@font-face {
+  font-family: "NeoL";
+  src: url("../assets/font/AppleSDGothicNeoL.ttf");
+}
+
+@font-face {
+  font-family: "NeoM";
+  src: url("../assets/font/AppleSDGothicNeoM.ttf");
+}
+
+@font-face {
+  font-family: "NeoR";
+  src: url("../assets/font/AppleSDGothicNeoR.ttf");
+}
+
+@font-face {
+  font-family: "NeoSB";
+  src: url("../assets/font/AppleSDGothicNeoSB.ttf");
+}
+
+@font-face {
+  font-family: "NeoT";
+  src: url("../assets/font/AppleSDGothicNeoT.ttf");
+}
+
+@font-face {
+  font-family: "NeoUL";
+  src: url("../assets/font/AppleSDGothicNeoUL.ttf");
+}
+
 .text-small {
   font-size: 11px;
 }
@@ -56,7 +101,7 @@ body {
 }
 
 a:link, a:visited {
-  color: #000000;
+  color: #131313;
   text-decoration: none;
 }
 
@@ -100,11 +145,73 @@ a.search-main:visited {
 
 a.link-border:link,
 a.link-border:visited {
-  color: #000000;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  background: url("../assets/images/arrow-right-icon.svg") no-repeat;
+  background-size: 10px auto;
+  background-position: 93vw 9px;
+  color: #131313;
+  font-family: "NeoM";
+  font-size: 18px;
   text-decoration: none;
   display: block;
-  border-bottom: 1px solid #FFA41C;
-  padding-bottom: 15px;
+  padding-left: 4vw;
+  padding-top: 5px;
+  padding-bottom: 19px;
+  border-bottom: 1.5px solid #E5E5E5;
+}
+
+a.link-top:link,
+a.link-top:visited {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  background: url("../assets/images/arrow-right-icon.svg") no-repeat;
+  background-size: 10px auto;
+  background-position: 93vw 23px;
+  color: #131313;
+  font-family: "NeoM";
+  font-size: 18px;
+  text-decoration: none;
+  display: block;
+  padding: 19px 4vw;
+  border-top: 1.5px solid #E5E5E5;
+  border-bottom: 1.5px solid #E5E5E5;
+}
+
+@media(min-width: 1200px){
+    a.link-border:link,
+    a.link-border:visited {
+      width: 1200px;
+      margin-left: calc(50% - 600px);
+      background: url("../assets/images/arrow-right-icon.svg") no-repeat;
+      background-size: 10px auto;
+      background-position: 1116px 9px;
+      color: #131313;
+      font-family: "NeoM";
+      font-size: 18px;
+      text-decoration: none;
+      display: block;
+      padding-top: 5px;
+      padding-bottom: 19px;
+      border-bottom: 1.5px solid #E5E5E5;
+    }
+
+    a.link-top:link,
+    a.link-top:visited {
+      width: 1200px;
+      margin-left: calc(50% - 600px);
+      background: url("../assets/images/arrow-right-icon.svg") no-repeat;
+      background-size: 10px auto;
+      background-position: 1116px 23px;
+      color: #131313;
+      font-family: "NeoM";
+      font-size: 18px;
+      text-decoration: none;
+      display: block;
+      padding: 19px 4vw;
+      border-top: 1.5px solid #E5E5E5;
+      border-bottom: 1.5px solid #E5E5E5;
+    }
 }
 
 .section-title {
@@ -140,13 +247,15 @@ table.no-space td {
 /********** OVERRIDE **********/
 @media (min-width: 1200px) {
   .container, .container-lg, .container-md, .container-sm, .container-xl {
-    max-width: 390px;
+    max-width: 1200px;
   }
 }
 
 .btn {
-  border-radius: 10px;
-  color: #000000 !important;
+  border-radius: 9px;
+  color: #131313 !important;
+  font-family: "NeoM";
+  font-size: 16px;
 }
 
 .no-rounded {
@@ -177,8 +286,6 @@ table.no-space td {
 .btn-primary {
   background: #FFA41C;
   border: 1px solid #FFA41C;
-  padding-left: 25px;
-  padding-right: 25px;
 }
 .btn-primary:active {
   background: #FFA41C;
@@ -213,6 +320,57 @@ table.no-space td {
   background: #fff;
 }
 
+.btn-login {
+  background: #FBC727;
+  text-align: center;
+  font-family: "NeoM";
+  width: 141.5777px;
+  height: 36.3952px;
+  white-space: nowrap;
+  font-size: 16px;
+  padding-top: 7px;
+}
+
+#naverIdLogin{
+    display: none;
+}
+.btn-naver {
+  background: #33AA3A url("../assets/images/naver.svg") no-repeat;
+  background-size: 18px auto;
+  background-position: 18px center;
+  color: #FFFFFF !important;
+  padding-top: 10px;
+  width: 274px;
+  height: 43px;
+}
+
+.btn-kakao {
+  background: #FDE400 url("../assets/images/kakao.svg") no-repeat;
+  background-size: 21px auto;
+  background-position: 18px 12px;
+  color: #191919 !important;
+  margin-top: 12px;
+  margin-bottom: 27px;
+  padding-top: 10px;
+  width: 274px;
+  height: 43px;
+}
+
+.btn-kakao-real {
+  margin-bottom: 12px;
+}
+
+.btn-facebook {
+  background: #1E77EF url("../assets/images/facebook.svg") no-repeat;
+  background-size: 21px auto;
+  background-position: 18px center;
+  color: #FFFFFF !important;
+  margin-bottom: 27px;
+  padding-top: 10px;
+  width: 274px;
+  height: 43px;
+}
+
 .card {
   border: 1px solid #FFA41C;
 }
@@ -227,9 +385,28 @@ table.no-space td {
 
 /* Input check */
 
+.form-check-input:not(:checked){
+    border: 1px solid #C0C0C0;
+    border-radius: 3px;
+    margin-top: 9px;
+    width: 15px;
+    height: 15px;
+}
+
+.form-check-input + label{
+    margin-left: -8px;
+    font-family: "NeoM";
+    font-size: 16px;
+    color: #131313;
+}
+
 .form-check-input:checked {
-  background-color: #FFA41C;
-  border-color: #FFA41C;
+    border-radius: 3px;
+    margin-top: 9px;
+    width: 15px;
+    height: 15px;
+    background-color: #FFA41C;
+    border-color: #FFA41C;
 }
 
 .customised .input[type="checkbox"] {
@@ -335,11 +512,24 @@ ul.tab-product-detail {
   background: #FFA41C;
 }
 /********** NAVIGATE **********/
-.btn-navigate {
-  background: url("../assets/images/arrow-left-icon.png") no-repeat left center;
-  font-size: 30px;
+.box-navigate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
   min-height: 45px;
+}
+.text-navigate {
+  padding-top: 6px;
+  align-self: center;
+  font-family: "NeoM";
+  font-size: 18px;
+}
+.btn-navigate {
+  height: 24px;
+  position: absolute;
+  background: url("../assets/images/arrow-left-icon.svg") no-repeat left center;
+  background-size: 9.8561px auto;
 }
 
 /********** PRODUCT ***********/

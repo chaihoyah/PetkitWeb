@@ -19,8 +19,10 @@ function Navigation(props) {
 
   return (
     <div className="my-3">
-      <Button variant="default" className="btn-navigate" onClick={handleShowConfirm}>{props.title}&nbsp;</Button>
-
+      <div className="box-navigate">
+        <Button variant="default" className="btn-navigate" onClick={handleShowConfirm}></Button>
+        <div className="text-navigate">{props.title}&nbsp;</div>
+      </div>
       {props.alert && (props.alert.length > 0) &&
       <Modal centered className="modal-qa" show={showConfirm} onHide={handleCloseConfirm}>
         <Modal.Body>{props.alert}</Modal.Body>

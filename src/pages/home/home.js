@@ -3,6 +3,7 @@ import Header from "../components/header";
 import SearchMain from "../components/header-main";
 import UserRating from "../components/user-rate";
 import { Button, Row, Col, Form, Card, Image, Modal, Tabs, Tab } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 
 //import MultiRangeSlider from "../components/MultiRangeSlider"
 import MultiRangeSlider from "multi-range-slider-react";
@@ -12,7 +13,8 @@ import "./home.css";
 import { Link } from "react-router-dom";
 
 function HomePage() {
-
+  const { state } = useLocation();
+  console.log(state);
   const [orderBy, setOrderBy] = useState("0");
 
   const handleChange = (event) => {

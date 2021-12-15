@@ -2,8 +2,11 @@
 .login-wrap {}
 
 .login-inside {
-  max-width: 220px;
-  margin: 0 auto;
+  padding-top: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* SIGN UP */
@@ -18,12 +21,14 @@
 .non-user-wrap {}
 
 .non-user-login-wrap {
-  background: url(../../assets/images/user-non.png) no-repeat left top;
-  background-size: 80px auto;
-  padding: 15px 0;
-  border-bottom: 1px solid #FFA41C;
-  padding-bottom: 15px;
-  margin-bottom: 15px;
+  background: url(../../assets/images/user-non.png) no-repeat;
+  background-size: 73px auto;
+  background-position: left 30px;
+  font-family: "NeoR";
+  font-size: 14px;
+  color : #757575;
+  padding: 36px 0;
+  padding-bottom: 56px;
 }
 
 .user-wrap {
