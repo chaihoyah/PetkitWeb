@@ -1,10 +1,9 @@
 import Navigation from "../components/navigation";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Row, Col, Button } from "react-bootstrap";
 
-function UserNon() {
+function UserNon(props) {
   const navigate = useNavigate();
-
   return (
     <>
       <Navigation title="마이페이지"/>
@@ -13,7 +12,7 @@ function UserNon() {
           <Col xs={12} className="text-center">
             <div className="non-user-login-wrap">
               <div className="d-block pt-0">
-                <Button variant="default" className="btn-login" onClick={() => navigate('/login')}>로그인</Button>
+                <Button variant="yellow" className="text-neom text-xxsmallmedium" style={{width:"141.5777px", height:"36.3952px", paddingTop: "7px"}} onClick={() => navigate('/login')}>로그인</Button>
                 <p className="pt-2 pb-0 mb-0">로그인 후 이용해주세요</p>
               </div>
             </div>

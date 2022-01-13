@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Navigation from "../components/navigation";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Row, Col, Image, Table, Button, Modal } from "react-bootstrap";
 import UserNon from "./user-non";
 
@@ -8,7 +8,7 @@ import "./user.css";
 
 function User() {
   const navigate = useNavigate();
-
+  const {state} = useLocation();
   // For Cancel Order Confirm
   const [showConfirm, setShowConfirm] = useState(false);
   const handleCloseConfirm = () => setShowConfirm(false);
@@ -19,16 +19,16 @@ function User() {
   const handleCloseConfirmDetail = () => setShowConfirmDetail(false);
   const handleShowConfirmDetail = () => setShowConfirmDetail(true);
 
-  const isLoggedIn = false; // Check user logged in or not
-
+  const isLoggedIn = localStorage.getItem("session_token"); // Check user logged in or not
   if (!isLoggedIn) {
-    return <UserNon />;
+    return <UserNon/>;
   }
 
   return (
     <>
       <Navigation />
       <div className="user-wrap">
+        <Button variant="naver" onClick={() => {localStorage.removeItem("session_token"); navigate('/',{replace:true})}}>로그아웃</Button>
         <Link to="/user-info" className="user-avatar">
         <Row>
           <Col xs={3}><Image src="images/user-pet-full.png" /></Col>

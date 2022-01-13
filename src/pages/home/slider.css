@@ -84,8 +84,58 @@
   z-index: 5;
 }
 
+.MuiSlider-root {
+  width: 92% !important;
+  margin-left: 13px;
+}
+
+.MuiSlider-rail {
+  background: #E4E4E4;
+  border: 4px solid #E4E4E4;
+  border-radius: 2.2px !important;
+}
+
+.MuiSlider-track {
+  background: #FBB03B !important;
+  border: 4px solid #FBB03B !important;
+}
+
+.MuiSlider-mark {
+  margin-top: -6px;
+  height: 5px !important;
+  background: #E4E4E4 !important;
+}
+
+.MuiSlider-mark.MuiSlider-markActive{
+  background: #FBB03B !important;
+}
+
+.MuiSlider-thumb {
+  background: #FBB03B !important;
+}
+
+.MuiSlider-thumb.Mui-active {
+  box-shadow: none !important;
+}
+
+.MuiSlider-valueLabel{
+  	font-family: "NeoSB" !important;
+  	font-size: 16px !important;
+  	color: #000000 !important;
+  	background: none !important;
+}
+
+.MuiSlider-valueLabelOpen.MuiSlider-valueLabel::before{
+    display: none;
+}
+
+.MuiSlider-valueLabelOpen.MuiSlider-valueLabel{
+    padding: 0;
+    margin-top: 10px;
+}
+
 /* For Chrome browsers */
-.thumb::-webkit-slider-thumb {
+/*.thumb::-webkit-slider-thumb {
   background: url("../../assets/images/range-icon.png") no-repeat left top;
 
   cursor: pointer;
@@ -93,7 +143,7 @@
   width: 21px;
   pointer-events: all;
   position: relative;
-}
+}*/
 
 /* For Firefox browsers */
 .thumb::-moz-range-thumb {

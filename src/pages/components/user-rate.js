@@ -10,28 +10,34 @@ function UserRating(props) {
   const className = "user-rating d-flex" + (props.align && (props.align.length > 0) ? " justify-content-" + props.align :  "");
 
   var size = 29;
+  var mright = 3;
+  var mtop = 0;
+  var padding = "0 0";
 
   if (props.size && (props.size === "xs")) {
-    size = 10;
+    size = 11;
   } else if (props.size === "sm") {
-    size = 20;
+    size = 13;
   } else {
-    size = 29;
+    size = 25;
+    mright = 6;
+    mtop = -8;
+    padding = "8px 0"
   }
 
 
   for (var i = 0; i < activeStar; i++) {
-    strActiveStar.push(<img key={i} src="images/star-active-icon.png" width={size} alt="user review" />);
+    strActiveStar.push(<img key={i} src="images/star-active-icon.svg" style = {{width: String(size)+"px", marginRight: String(mright)+"px", marginTop: String(mtop)+"px"}} alt="review active" />);
   }
 
   for (var j = 0; j < unactiveStart; j++) {
-    strUnactiveStar.push(<img key={j} src="images/star-icon.png" width={size} alt="user review" />);
+    strUnactiveStar.push(<img key={j} src="images/star-icon.svg" style = {{width: String(size)+"px", marginRight: String(mright)+"px", marginTop: String(mtop)+"px"}} alt="review unactive" />);
   }
 
   return (
-    <div className={className}>
-      {(props.show && (props.show === "on")) ? <span className="user-rating-score">{activeStar}</span> : ""}
-      <div className="user-rating-start-wrap">
+    <div className={className} style={{padding:padding}}>
+      { (props.show === "on") && <div className="user-rating-score">{activeStar}</div>}
+      <div className="user-rating-star-wrap">
         {strActiveStar}
         {strUnactiveStar}
       </div>
