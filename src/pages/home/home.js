@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Header from "../components/header";
 import SearchMain from "../components/header-main";
+import CustomSelect from "../components/custom-select";
 import MainProduct from "./main-product";
 import { Button, Row, Col, Form, Image, Modal, Tabs, Tab } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
@@ -20,11 +21,6 @@ function HomePage() {
 
   // Cart number check
   const [cartNum, setCartNum] = useState(1);
-
-  const handleChange = (event) => {
-    setOrderBy(event.target.value);
-    localStorage.setItem("sort", event.target.value);
-  }
 
   const handleTab = (text) => {
     setTabNum(text);
@@ -303,110 +299,98 @@ function HomePage() {
     <>
       <Header/>
       <SearchMain />
-      <div className="main-wrap overflow-hidden">
-        <div className="d-flex flex-row">
-          <div className="py-2 w-100">
-            <div className="mb-3 d-flex flex-row align-items-center">
-                <Button variant="filter" onClick={() => {handleShowFilter("");}}></Button>
-                {filterList.map((text, index) => (
-                    <Button variant="filter-text" key={index} onClick={() => {handleShowFilter(text);}}>{text}</Button>
-                ))}
-                <div className="ms-auto p-2">
-                  <Form.Select value={orderBy} onChange={handleChange}>
-                    <option style={{}}value="1">추천순</option>
-                    <option value="2">인기순</option>
-                    <option value="3">최신순</option>
-                    <option value="4">조리짧은순</option>
-                  </Form.Select>
+      <div className="main-wrap">
+        <div style={{marginTop:"12px", width:"100%", marginBottom:"5%", display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
+            <Button variant="filter" onClick={() => {handleShowFilter("");}}></Button>
+            {filterList.map((text, index) => (
+                <Button variant="filter-text" key={index} onClick={() => {handleShowFilter(text);}}>{text}</Button>
+            ))}
+            <CustomSelect value={[orderBy, setOrderBy]} options={[{label:"추천순", value:"1"}, {label:"인기순", value:"2"}, {label:"최신순", value:"3"}, {label:"짧은시간순", value:"4"}]}/>
+        </div>
+        {orderBy === "1" && <p className="main-text">{isLoggedIn?("뭉치"+"를 위한 best 추천 3"):("펫키트 추천 상품 best 3")}</p>}
+        <Modal centered show={showFilter} onHide={handleCloseFilter} className="modal-filter" backdropClassName="modal-backdrop">
+          <Modal.Header>
+            <Button className="filter-btn-close" variant="default" onClick={handleCloseFilter}></Button>
+          </Modal.Header>
+          <Modal.Body>
+            <Tabs activeKey={tabNum} defaultActiveKey="basic" id="tab-filter" className="mb-3 tab-petkit tab-filter" onSelect={handleTab}>
+              <Tab tabClassName = "tab-2text" eventKey="basic" title="기본">
+                <p className="mt-1 mb-1 text-neosb text-smallmedium text-halfblack">기본</p>
+                {isLoggedIn ?
+                  (<Form.Group className="mb-0" controlId="basic1">
+                    <Form.Check type="checkbox" label="안심 레시피만 보기" checked={tmpcheckedState[0]} onChange={() => handleOnChangeCheckedState(0)} />
+                  </Form.Group>):(
+                   <Form.Group className="mb-0" controlId="basic1">
+                      <Form.Check type="checkbox" label="로그인 후 이용가능합니다." checked={false} onChange={() => {}}/>
+                   </Form.Group>
+                  )
+                }
+                <p className="mt-5 mb-1 text-neosb text-smallmedium text-halfblack">사용 조리 기구</p>
+                <div>
+                  <Form.Check inline label="오븐" id = "oven" type="checkbox" checked={tmpcheckedState[1]} onChange={() => handleOnChangeCheckedState(1)} />
+                  <Form.Check inline label="에어프라이어" id = "airfyer" type="checkbox" checked={tmpcheckedState[2]} onChange={() => handleOnChangeCheckedState(2)} />
+                  <Form.Check inline label="믹서" id = "mixer" type="checkbox" checked={tmpcheckedState[3]} onChange={() => handleOnChangeCheckedState(3)} />
+                  <br></br>
+                  <Form.Check inline label="찜기" id = "steamer" type="checkbox" checked={tmpcheckedState[4]} onChange={() => handleOnChangeCheckedState(4)} />
+                  <Form.Check inline label="전자레인지" id = "micro" type="checkbox" checked={tmpcheckedState[5]} onChange={() => handleOnChangeCheckedState(5)} />
                 </div>
-            </div>
-            {orderBy === "1" && <p className="main-text">{isLoggedIn?("뭉치"+"를 위한 best 추천 3"):("펫키트 추천 상품 best 3")}</p>}
-          </div>
-          <Modal centered show={showFilter} onHide={handleCloseFilter} className="modal-filter" backdropClassName="modal-backdrop">
-            <Modal.Header>
-              <Button className="filter-btn-close" variant="default" onClick={handleCloseFilter}></Button>
-            </Modal.Header>
-            <Modal.Body>
-
-              <Tabs activeKey={tabNum} defaultActiveKey="basic" id="tab-filter" className="mb-3 tab-petkit tab-filter" onSelect={handleTab}>
-                <Tab tabClassName = "tab-2text" eventKey="basic" title="기본">
-                  <p className="mt-1 mb-1 text-neosb text-smallmedium text-halfblack">기본</p>
-                  {isLoggedIn ?
-                    (<Form.Group className="mb-0" controlId="basic1">
-                      <Form.Check type="checkbox" label="안심 레시피만 보기" checked={tmpcheckedState[0]} onChange={() => handleOnChangeCheckedState(0)} />
-                    </Form.Group>):(
-                     <Form.Group className="mb-0" controlId="basic1">
-                        <Form.Check type="checkbox" label="로그인 후 이용가능합니다." checked={false} onChange={() => {}}/>
-                     </Form.Group>
-                    )
-                  }
-                  <p className="mt-5 mb-1 text-neosb text-smallmedium text-halfblack">사용 조리 기구</p>
-                  <div>
-                    <Form.Check inline label="오븐" id = "oven" type="checkbox" checked={tmpcheckedState[1]} onChange={() => handleOnChangeCheckedState(1)} />
-                    <Form.Check inline label="에어프라이어" id = "airfyer" type="checkbox" checked={tmpcheckedState[2]} onChange={() => handleOnChangeCheckedState(2)} />
-                    <Form.Check inline label="믹서" id = "mixer" type="checkbox" checked={tmpcheckedState[3]} onChange={() => handleOnChangeCheckedState(3)} />
-                    <br></br>
-                    <Form.Check inline label="찜기" id = "steamer" type="checkbox" checked={tmpcheckedState[4]} onChange={() => handleOnChangeCheckedState(4)} />
-                    <Form.Check inline label="전자레인지" id = "micro" type="checkbox" checked={tmpcheckedState[5]} onChange={() => handleOnChangeCheckedState(5)} />
-                  </div>
-                </Tab>
-                <Tab tabClassName = "tab-2text" eventKey="price" title="가격">
-                  <p className="mt-1 mb-3 text-neosb text-smallmedium text-halfblack">가격</p>
+              </Tab>
+              <Tab tabClassName = "tab-2text" eventKey="price" title="가격">
+                <p className="mt-1 mb-3 text-neosb text-smallmedium text-halfblack">가격</p>
+                <Slider
+                  min={minPrice}
+                  max={maxPrice}
+                  step={priceStep}
+                  valueLabelDisplay="on"
+                  value={tmppriceValue}
+                  valueLabelFormat={handlePriceText}
+                  marks
+                  onChange={(e) => {
+                    handleRangePriceInput(e);
+                  }}
+                />
+              </Tab>
+              <Tab tabClassName = "tab-2text" eventKey="size" title="사이즈">
+                <p className="mt-1 mb-1 text-neosb text-smallmedium text-halfblack">사이즈</p>
+                <Form.Group controlId="sizeCheckbox">
+                  <Form.Check type="checkbox" label="L-size only" checked={tmpcheckedState[6]} onChange={() => handleOnChangeCheckedState(6)} />
+                </Form.Group>
+              </Tab>
+              <Tab tabClassName = "tab-2text" eventKey="time" title="난이도/시간">
+                <p className="mt-1 mb-1 text-neosb text-smallmedium text-halfblack">난이도</p>
+                <Form.Group className="mb-0" controlId="timeCheckbox1">
+                  <Form.Check type="checkbox" label="Challenge 제외하고 보기" checked={tmpcheckedState[7]} onChange={() => handleOnChangeCheckedState(7)} />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="timeCheckbox2">
+                  <Form.Check type="checkbox" label="Challenge만 보기" checked={tmpcheckedState[8]} onChange={() => handleOnChangeCheckedState(8)} />
+                </Form.Group>
+                <Form.Label>시간</Form.Label>
+                <div className="mb-2">
                   <Slider
-                    min={minPrice}
-                    max={maxPrice}
-                    step={priceStep}
+                    min={minTime}
+                    max={maxTime}
+                    step={timeStep}
                     valueLabelDisplay="on"
-                    value={tmppriceValue}
-                    valueLabelFormat={handlePriceText}
+                    value={tmptimeValue}
+                    valueLabelFormat={handleTimeText}
                     marks
                     onChange={(e) => {
-                      handleRangePriceInput(e);
+                      handleRangeTimeInput(e);
                     }}
                   />
-                </Tab>
-                <Tab tabClassName = "tab-2text" eventKey="size" title="사이즈">
-                  <p className="mt-1 mb-1 text-neosb text-smallmedium text-halfblack">사이즈</p>
-                  <Form.Group controlId="sizeCheckbox">
-                    <Form.Check type="checkbox" label="L-size only" checked={tmpcheckedState[6]} onChange={() => handleOnChangeCheckedState(6)} />
-                  </Form.Group>
-                </Tab>
-                <Tab tabClassName = "tab-2text" eventKey="time" title="난이도/시간">
-                  <p className="mt-1 mb-1 text-neosb text-smallmedium text-halfblack">난이도</p>
-                  <Form.Group className="mb-0" controlId="timeCheckbox1">
-                    <Form.Check type="checkbox" label="Challenge 제외하고 보기" checked={tmpcheckedState[7]} onChange={() => handleOnChangeCheckedState(7)} />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="timeCheckbox2">
-                    <Form.Check type="checkbox" label="Challenge만 보기" checked={tmpcheckedState[8]} onChange={() => handleOnChangeCheckedState(8)} />
-                  </Form.Group>
-                  <Form.Label>시간</Form.Label>
-                  <div className="mb-2">
-                    <Slider
-                      min={minTime}
-                      max={maxTime}
-                      step={timeStep}
-                      valueLabelDisplay="on"
-                      value={tmptimeValue}
-                      valueLabelFormat={handleTimeText}
-                      marks
-                      onChange={(e) => {
-                        handleRangeTimeInput(e);
-                      }}
-                    />
-                  </div>
-                </Tab>
-              </Tabs>
-            </Modal.Body>
-            <Modal.Footer>
-              <div className="filter-button-section">
-                <Row>
-                  <Col xs={3}><div className="d-grid"><Button variant="reset" size="xs" onClick = {() => filterReset()}>초기화</Button></div></Col>
-                  <Col xs={9}><div className="d-grid"><Button variant="apply" size="xs" onClick = {() => filterApply()}>적용하기</Button></div></Col>
-                </Row>
-              </div>
-            </Modal.Footer>
-          </Modal>
-        </div>
+                </div>
+              </Tab>
+            </Tabs>
+          </Modal.Body>
+          <Modal.Footer>
+            <div className="filter-button-section">
+              <Row>
+                <Col xs={3}><div className="d-grid"><Button variant="reset" size="xs" onClick = {() => filterReset()}>초기화</Button></div></Col>
+                <Col xs={9}><div className="d-grid"><Button variant="apply" size="xs" onClick = {() => filterApply()}>적용하기</Button></div></Col>
+              </Row>
+            </div>
+          </Modal.Footer>
+        </Modal>
         <div className="products">
             {prodBigList.map((state, index) =>
                 <MainProduct key={state.r_id} type="0" state={state}/>

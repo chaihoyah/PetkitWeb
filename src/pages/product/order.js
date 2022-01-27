@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button, Row, Col, Form, Image, Tabs, Tab, Table } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
+import CustomSelectCheck from "../components/custom-selectcheck";
 
 import Navigation from "../components/navigation";
 
@@ -17,6 +18,9 @@ function OrderPage() {
   const [postalCode, setPostalCode] = useState("");
   const [address, setAddress] = useState("");
   const [detailAddress, setDetailAddress] = useState("");
+
+  const [additionalRequest, setAdditionalRequest] = useState("");
+  const [arNum, setarNum] = useState("0");
 
   function makePhoneString(str){
     return str.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, "$1-$2-$3");
@@ -64,51 +68,35 @@ function OrderPage() {
 
       <section className="order-shipping-info tab-order">
         <h3 className="order-section-title">배송지 정보</h3>
-        {isLoggedIn ? (
         <Tabs justify defaultActiveKey="new-address" className="mb-3 tab-petkit tab-order">
           <Tab eventKey="new-address" tabClassName = "tab-2text order" title="신규 배송지">
             <Form style={{marginTop:"32px"}}>
-              <div style={{display:"flex", flexDirection:"row", alignItems:"flex-end", justifyContent:"space-between", paddingBottom:"32px"}}>
-                <Form.Group className="mb-0" controlId="signupForm.name" style={{display:"flex", flexDirection:"column"}}>
-                  <Form.Label className="mb-2 orderinput" id="orderinput-label">우편번호</Form.Label>
-                  <Form.Control readOnly={true} size="sm" style={{width:"200px"}} placeholder="주소찾기를 통해 찾아주세요." value={postalCode} required />
+              <div style={{display:"flex", flexDirection:"row", alignItems:"flex-end", justifyContent:"space-between", paddingBottom:"8px"}}>
+                <Form.Group className="mb-0" style={{display:"flex", flexDirection:"column"}}>
+                  <Form.Label className="text-neosb text-small text-black" style={{marginBottom:"8px"}}>주소</Form.Label>
+                  <Form.Control readOnly={true} size="sm" style={{width:"223px", height:"42px"}} placeholder="주소 찾기를 통해 찾아주세요." value={postalCode} required />
                 </Form.Group>
-                <Button variant="purple" style={{width:"125px", height:"40px"}} onClick={() => {findPostalCode()}}>주소 찾기</Button>
+                <Button variant="orangeborder" className="text-neom text-xxsmallmedium text-black" style={{width:"106px", height:"42px"}} onClick={() => {findPostalCode()}}>주소 찾기</Button>
               </div>
-              <Form.Group className="mb-0" style={{display:"flex", flexDirection:"column", paddingBottom:"32px"}}>
-                <Form.Label className="orderinput" id="orderinput-label" style={{marginBottom:"16px"}}>우편번호</Form.Label>
-                <Form.Control type="input" size="sm" style={{width:"100%", marginBottom:"16px"}} placeholder="주소를 입력해 주세요." onChange={(e) => {setAddress(e.target.value);}} required />
-                <Form.Control type="input" size="sm" style={{width:"100%"}} placeholder="상세주소를 입력해 주세요." onChange={(e) => {setDetailAddress(e.target.value);}} required />
+              <Form.Group style={{display:"flex", flexDirection:"column", paddingBottom:"32px"}}>
+                <Form.Control readOnly={true} size="sm" style={{width:"100%", height:"42px", marginBottom:"8px"}} placeholder="주소 찾기를 통해 찾아주세요." value={address} required />
+                <Form.Control type="input" size="sm" style={{width:"100%", height:"42px"}} placeholder="상세주소를 입력해 주세요." onChange={(e) => {setDetailAddress(e.target.value);}} required />
               </Form.Group>
             </Form>
           </Tab>
-          <Tab eventKey="select-address" tabClassName = "tab-2text order" title="배송지 선택">
+          <Tab eventKey="select-address" tabClassName = "tab-2text order" title="배송지 선택" disabled={!isLoggedIn}>
             <p>배송지 1</p>
             <p>배송지 2</p>
             <p>배송지 3</p>
             <p>배송지 4</p>
           </Tab>
         </Tabs>
-        ):(
         <div>
-            <p>배송지 주소</p>
-            <Form>
-              <Form.Group className="mb-3">
-                <Form.Control type="email" size="lg" placeholder="우편번호 입력해주세요 (우편번호 버튼)" />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Control type="text" size="lg" placeholder="주소를 입력해주세요" />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Control type="text" size="lg" placeholder="상세 주소를 입력해주세요" />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Control as="textarea" size="lg" rows={3} placeholder="요청사항 (자주 쓰이는거 몇개 선택 or 직접 입력) 중앙 현관 비번 알려주셈" />
-              </Form.Group>
-            </Form>
+            <Form.Group className="mb-0" style={{display:"flex", flexDirection:"column"}}>
+              <Form.Label className="text-neosb text-small text-black" style={{marginBottom:"8px"}}>요청사항 (선택)</Form.Label>
+            </Form.Group>
+            <CustomSelectCheck value={[arNum, setarNum]} type="request" size="lg" textalign="flex-start" placeholder="추가 요청사항 선택" options={[{label:"부재시 경비실에 맡겨주세요.", value:"1"}, {label:"문앞에 놓고 가주세요.", value:"2"}, {label:"빠른 배송 부탁드려요.", value:"3"}]}/>
         </div>
-        )
-        }
       </section>
 
       <section className="order-detail-info mt-5">
